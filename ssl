@@ -1,0 +1,38 @@
+How to install ssl certificate in ubuntu 18.04
+
+
+first of all need to create .csr file from hosting server using blow command
+
+#sudo mkdir /opt/ssl
+
+#cd /opt/ssl
+
+#sudo openssl req -new -newkey rsa:2048 -nodes -keyout Project_name.key -out project_name.csr
+
+this commnad will generate .csr file in ssl directory
+
+copy the content from .csr and paste it in ssl provider .csr section
+
+it will generate ssl certificate, you have to donload it and upload on ssl directory in our server
+
+we need three file to impliment ssl
+
+1 .crt
+2 .key
+3 chain/bundal.crt
+
+.key file will generate with .csr and remaining file wwill get in ssl certificate
+
+<VirtualHost *:443>
+DocumentRoot /var/www/html
+SSLEngine on
+SSLCertificateFile /opt/ssl/becard.crt
+SSLCertificateKeyFile /opt/ssl/becard.key
+SSLCertificateChainFile /opt/ssl/becardbundal.crt
+</VirtualHost>
+
+do the folloing changes in code and paste it in /etc/apache2/sites-enabled/000-default.conf file
+
+and restart your server
+
+
